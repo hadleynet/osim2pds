@@ -9,43 +9,43 @@
   :password "osim_cdm"}
 ))
   
-(defentity person
+(defentity person_entity
   (pk :PERSON_ID)
   (table :PERSON)
 )  
 
-(defentity medication
+(defentity medication_entity
   (pk :DRUG_ERA_ID)
   (table :DRUG_ERA)
-  (belongs-to person {:fk :PERSON_ID})
+  (belongs-to person_entity {:fk :PERSON_ID})
 )
 
-(defentity condition
+(defentity condition_entity
   (pk :CONDITION_ERA_ID)
   (table :CONDITION_ERA)
-  (belongs-to person {:fk :PERSON_ID})
+  (belongs-to person_entity {:fk :PERSON_ID})
 )
 
-(defn osim_person
+(defn person
   "Lookup a patient by id"
   [id]
-  (select person
+  (select person_entity
     (where {:PERSON_ID id})
   )
 )
 
-(defn osim_person_medications
+(defn medications
   "Lookup a patients medications by patient_id"
   [id]
-  (select medication
+  (select medication_entity
     (where {:PERSON_ID id})
   )
 )
 
-(defn osim_person_conditions
+(defn conditions
   "Lookup a patients conditions by patient_id"
   [id]
-  (select condition
+  (select condition_entity
     (where {:PERSON_ID id})
   )
 )
