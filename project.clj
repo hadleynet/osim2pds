@@ -10,6 +10,7 @@ data server."
     [org.clojure/clojure "1.4.0"]
     [korma "0.3.0-beta7"]
     [com.oracle/ojdbc6 "11.2.0.3"]
+    [com.novemberain/monger "1.3.1"]
   ]
   :repositories [
     ["java.net" "http://download.java.net/maven/2"]

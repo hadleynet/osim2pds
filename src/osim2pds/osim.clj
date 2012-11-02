@@ -49,3 +49,7 @@
     (where {:PERSON_ID id})
   )
 )
+
+(defn gender_code [gender_concept_id]
+  ({8507M "M" 8532M "F"} gender_concept_id)
+)

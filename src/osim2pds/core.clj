@@ -1,6 +1,6 @@
 (ns osim2pds.core
   (:gen-class)
-  (:require [osim2pds.osim :as osim] [osim2pds.pds :as pds])
+  (:require [osim2pds.osim :as osim] [osim2pds.pds :as pds] [osim2pds.rand :as rand])
 )
 
 (defn -main
@@ -11,10 +11,17 @@
     (let [patient (first (osim/person id))]
       (if patient
         (do 
-          (let [yob (patient :YEAR_OF_BIRTH) gender (patient :GENDER_CONCEPT_ID) ts (java.util.Calendar/getInstance)]
+          (let [
+            gender (osim/gender_code (patient :GENDER_CONCEPT_ID))
+            forename (rand/forename gender)
+            surname (rand/surname)
+            address (rand/address)
+            yob (patient :YEAR_OF_BIRTH) 
+            dob (java.util.GregorianCalendar. yob (rand-int 12) (+ 1 (rand-int 28)))
+            ts (quot (.getTimeInMillis dob) 1000)
+          ]
+            (pds/save forename surname gender ts address)
             (print ".")
-            (. ts set (.intValue yob) java.util.Calendar/JANUARY 31)
-            (pds/save (quot (.getTimeInMillis ts) 1000) (.intValue gender))
           )
         )
       )

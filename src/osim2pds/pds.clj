@@ -12,7 +12,15 @@
 
 (defn save
   "Save a patient"
-  [dob gender]
-  (insert "documents" { :_id (ObjectId.) :dob dob :gender gender })
+  [forename surname gender dob address]
+  (insert "documents" { 
+    :_id (ObjectId.) 
+    :first forename 
+    :last surname 
+    :dob dob 
+    :gender gender
+    :address address
+    :expired false
+  })
 )
 
