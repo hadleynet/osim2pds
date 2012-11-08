@@ -1,3 +1,5 @@
+; OSIM database access functions
+
 (ns osim2pds.osim
   (:gen-class)
   (:use korma.db korma.core)
@@ -26,6 +28,11 @@
   (belongs-to person_entity {:fk :PERSON_ID})
 )
 
+(defentity concept_entity
+  (pk :CONCEPT_ID)
+  (table :CONCEPT)
+)
+
 (defn person
   "Lookup a patient by id"
   [id]
@@ -48,6 +55,20 @@
   (select condition_entity
     (where {:PERSON_ID id})
   )
+)
+
+(defn concept-name
+  "Return the human readable name of the supplied concept id"
+  [id]
+  ((first (select concept_entity
+    (where {:CONCEPT_ID id}))) :CONCEPT_NAME)
+)
+
+(defn codes
+  "Return the codes for a supplied concept id as a map of code-set-name code-list, e.g. ({\"RxNorm\" [\"foo\"]} {\"RxNorm\" [\"bar\"]} {\"SNOMED-CT\" [\"yyz\"]})"
+  [id]
+  (map (fn [entry] {(entry :code_set) [(entry :code)]}) 
+    (exec-raw ["SELECT map.SOURCE_CODE as code, vocab.VOCABULARY_NAME as code_set FROM SOURCE_TO_CONCEPT_MAP map, VOCABULARY vocab WHERE map.SOURCE_VOCABULARY_ID = vocab.VOCABULARY_ID AND TARGET_CONCEPT_ID = ?" [id]] :results))
 )
 
 (defn gender_code [gender_concept_id]

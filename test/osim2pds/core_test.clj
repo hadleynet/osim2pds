@@ -2,6 +2,6 @@
   (:use clojure.test
         osim2pds.core))
 
-(deftest a-test
+(deftest dummy-test
   (testing "I pass."
     (is (= 1 1))))

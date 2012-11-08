@@ -1,3 +1,5 @@
+; Patient data server access function
+
 (ns osim2pds.pds
   (:gen-class)
   (:use [monger.core :only [connect! set-db! get-db]]
@@ -7,12 +9,16 @@
 )
 
 ;; localhost, default port
-(connect!)
-(set-db! (get-db "monger-test"))
+(defn initialize
+  "Setup Mongo connection"
+  []
+  (connect!)
+  (set-db! (get-db "monger-test"))
+)
 
 (defn save
   "Save a patient"
-  [forename surname gender dob address]
+  [forename surname gender dob address meds]
   (insert "documents" { 
     :_id (ObjectId.) 
     :first forename 
@@ -21,6 +27,7 @@
     :gender gender
     :address address
     :expired false
+    :medications meds
   })
 )
 

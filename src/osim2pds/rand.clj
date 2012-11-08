@@ -1,3 +1,5 @@
+; Data randomization functions
+
 (ns osim2pds.rand
   (:gen-class)
 )
