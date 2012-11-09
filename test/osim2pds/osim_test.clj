@@ -6,5 +6,4 @@
   (testing "Gender code lookup."
     (is (= "M" (gender_code 8507M)))
     (is (= "F" (gender_code 8532M)))
-  )
-)
+  ))

@@ -1,8 +1,7 @@
 ; Data randomization functions
 
 (ns osim2pds.rand
-  (:gen-class)
-)
+  (:gen-class))
 
 (def forenames {
   "M" '("James" "John" "Robert" "Michael" "William" "David" "Richard" "Charles" "Joseph" 
@@ -68,8 +67,7 @@
     "Jennie" "Nora" "Margie" "Nina" "Cassandra" "Leah" "Penny" "Kay" "Priscilla" "Naomi"
     "Carole" "Brandy" "Olga" "Billie" "Dianne" "Tracey" "Leona" "Jenny" "Felicia" "Sonia"
     "Miriam" "Velma" "Becky" "Bobbie" "Violet" "Kristina" "Toni" "Misty" "Mae" "Shelly"
-    "Daisy" "Ramona" "Sherri" "Erika" "Katrina" "Claire")
-})
+    "Daisy" "Ramona" "Sherri" "Erika" "Katrina" "Claire")})
 
 (defn gender [] (rand-nth (keys forenames)))
 (defn forename [gender] (rand-nth (forenames gender)))
@@ -151,8 +149,7 @@
   "04400" {:city "Bangor" :state "ME"}
   "05400" {:city "Burlington" :state "VT"}
   "06000" {:city "Hartford" :state "CT"}
-  "06500" {:city "New Haven" :state "CT"}
-})
+  "06500" {:city "New Haven" :state "CT"}})
 
 (defn city []
   (let [zip (rand-nth (keys zipcodes)) city (zipcodes zip)]
