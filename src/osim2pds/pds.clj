@@ -22,14 +22,14 @@
 (defn save
   "Save a patient"
   [id forename surname gender dob address meds conditions]
-  (insert "documents" { 
+  (insert "records" { 
     :_id (ObjectId.)
     :medical_record_number (.toString id)
     :first forename 
     :last surname 
-    :dob dob 
+    :birthdate dob 
     :gender gender
-    :address address
+    :addresses [address]
     :expired false
     :medications (map mongoidize meds (repeatedly (fn [] "Medication")))
     :conditions (map mongoidize conditions (repeatedly (fn [] "Condition")))}))

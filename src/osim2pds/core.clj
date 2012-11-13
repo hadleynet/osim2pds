@@ -13,7 +13,9 @@
   "Extract the standard codes for the supplied OSIM drug concept"
   [id]
   (let [codes (osim/codes id)]
-    (apply merge-with concat codes)
+    (if (> (count codes) 0)
+      (apply merge-with concat codes)
+      {})
   ))
 
 (defn med-map
@@ -25,6 +27,7 @@
     :description (osim/concept-name (osim-med :DRUG_CONCEPT_ID))
     :mood_code "EVN"
     :codes (extract-codes (osim-med :DRUG_CONCEPT_ID))
+    :status_code {"HL7 ActStatus" ["active"] "SNOMED-CT" ["55561003"]}
   })
 
 (defn medications
@@ -41,7 +44,7 @@
     :description (osim/concept-name (osim-condition :CONDITION_CONCEPT_ID))
     :mood_code "EVN"
     :codes (extract-codes (osim-condition :CONDITION_CONCEPT_ID))
-    :status_code {"HL7 ActStatus" "active" "SNOMED-CT" "55561003"}
+    :status_code {"HL7 ActStatus" ["active"] "SNOMED-CT" ["55561003"]}
   })
 
 (defn conditions

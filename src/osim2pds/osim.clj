@@ -50,7 +50,8 @@
   "Return the human readable name of the supplied concept id"
   [id]
   (let [concept (first (select concept_entity (where {:CONCEPT_ID id})))]
-    (if concept
+    (if (nil? concept)
+      "Unknown"
       (concept :CONCEPT_NAME))))
 
 (defn codes

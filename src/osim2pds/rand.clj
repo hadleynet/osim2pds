@@ -156,4 +156,4 @@
   {:city (city :city) :state (city :state) :zip zip}))
 
 (defn address []
-  (assoc (city) :street [(street)]))
+  (assoc (city) :street [(street)] :use "HP"))
