@@ -50,9 +50,9 @@
   "Return the human readable name of the supplied concept id"
   [id]
   (let [concept (first (select concept_entity (where {:CONCEPT_ID id})))]
-    (if (nil? concept)
-      "Unknown"
-      (concept :CONCEPT_NAME))))
+    (if concept
+      (concept :CONCEPT_NAME)
+      "Unknown")))
 
 (defn codes
   "Return the codes for a supplied concept id as a map of code-set-name code-list, e.g. ({\"RxNorm\" [\"foo\"]} {\"RxNorm\" [\"bar\"]} {\"SNOMED-CT\" [\"yyz\"]})"

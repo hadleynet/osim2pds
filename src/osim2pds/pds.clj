@@ -21,7 +21,7 @@
 
 (defn save
   "Save a patient"
-  [id forename surname gender dob address meds conditions]
+  [id {:keys [forename surname gender address]} dob meds conditions]
   (insert "records" { 
     :_id (ObjectId.)
     :medical_record_number (.toString id)

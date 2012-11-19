@@ -157,3 +157,12 @@
 
 (defn address []
   (assoc (city) :street [(street)] :use "HP"))
+  
+(defn fake-identity
+  "Given a gender, return an entire entity, including name and complete address"
+  [gender]
+  {:gender gender
+   :forename (forename gender)
+   :surname (surname)
+   :address (address)})
+
