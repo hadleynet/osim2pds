@@ -17,6 +17,11 @@
       (apply merge-with concat codes)
       {})
   ))
+  
+(defn has-no-codes
+  "Returns true if the supplied entry has zero codes, false otherwise"
+  [entry]
+  (= 0 (count (:codes entry))))
 
 (defn med-map
   "Convert OSIM patient medication data to PDS format"
@@ -33,7 +38,7 @@
 (defn medications
   "Get the patient medications in PDS format"
   [id]
-  (map med-map (osim/medications id)))
+  (remove has-no-codes (map med-map (osim/medications id))))
 
 (defn condition-map
   "Convert OSIM patient condition data to PDS format"
@@ -50,7 +55,7 @@
 (defn conditions
   "Get the patient conditions in PDS format"
   [id]
-  (map condition-map (osim/conditions id)))
+  (remove has-no-codes (map condition-map (osim/conditions id))))
   
 (defn yob2dob
   [yob]
@@ -65,7 +70,7 @@
  
   (pds/initialize)
   ; for each patient - relies on OSIM patient id being monotonically increasing integers
-  (doseq [id (range 1 11)]
+  (doseq [id (range 1 1000)]
     (if-let [patient (first (osim/person id))]
       (let [{:keys [PERSON_ID GENDER_CONCEPT_ID YEAR_OF_BIRTH]} patient
             fake-id (rand/fake-identity (osim/gender_code GENDER_CONCEPT_ID))
@@ -74,6 +79,7 @@
             conditions (conditions PERSON_ID)]
         (pds/save PERSON_ID fake-id dob meds conditions)
         (print ".")
+        (flush)
       )
     )
   )
