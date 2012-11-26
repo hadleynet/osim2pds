@@ -52,7 +52,7 @@
   [id]
   (map condition-map (osim/conditions id)))
   
-(defn yob->dob
+(defn yob2dob
   [yob]
   (-> yob
       (java.util.GregorianCalendar. (rand-int 12) (+ 1 (rand-int 28)))
@@ -69,9 +69,9 @@
     (if-let [patient (first (osim/person id))]
       (let [{:keys [PERSON_ID GENDER_CONCEPT_ID YEAR_OF_BIRTH]} patient
             fake-id (rand/fake-identity (osim/gender_code GENDER_CONCEPT_ID))
-            dob (yob->dob YEAR_OF_BIRTH)
-            meds (medications (patient :PERSON_ID))
-            conditions (conditions (patient :PERSON_ID))]
+            dob (yob2dob YEAR_OF_BIRTH)
+            meds (medications PERSON_ID)
+            conditions (conditions PERSON_ID)]
         (pds/save PERSON_ID fake-id dob meds conditions)
         (print ".")
       )

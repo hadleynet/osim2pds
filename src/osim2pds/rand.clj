@@ -4,7 +4,7 @@
   (:gen-class))
 
 (def forenames {
-  "M" '("James" "John" "Robert" "Michael" "William" "David" "Richard" "Charles" "Joseph" 
+  :M '("James" "John" "Robert" "Michael" "William" "David" "Richard" "Charles" "Joseph" 
     "Thomas" "Christopher" "Daniel" "Paul" "Mark" "Donald" "George" "Kenneth" "Steven" 
     "Edward" "Brian" "Ronald" "Anthony" "Kevin" "Jason" "Matthew" "Gary" "Timothy" "Jose" 
     "Larry" "Jeffrey" "Frank" "Scott" "Eric" "Stephen" "Andrew" "Raymond" "Gregory" 
@@ -36,7 +36,7 @@
     "Daryl" "Ross" "Virgil" "Andy" "Marshall" "Salvador" "Perry" "Kirk" "Sergio" "Marion" 
     "Tracy" "Seth" "Kent" "Terrance" "Rene" "Eduardo" "Terrence" "Enrique" "Freddie" 
     "Wade")
-  "F" '("Mary" "Patricia" "Linda" "Barbara" "Elizabeth" "Jennifer" "Maria" "Susan" 
+  :F '("Mary" "Patricia" "Linda" "Barbara" "Elizabeth" "Jennifer" "Maria" "Susan" 
     "Margaret" "Dorothy" "Lisa" "Nancy" "Karen" "Betty" "Helen" "Sandra" "Donna" "Carol"
     "Ruth" "Sharon" "Michelle" "Laura" "Sarah" "Kimberly" "Deborah" "Jessica" "Shirley"
     "Cynthia" "Angela" "Melissa" "Brenda" "Amy" "Anna" "Rebecca" "Virginia" "Kathleen"

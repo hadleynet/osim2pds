@@ -5,6 +5,7 @@
   (:use [monger.core :only [connect! set-db! get-db]]
         [monger.collection :only [insert]])
   (:import [org.bson.types ObjectId]
+           [java.util Date]
            [com.mongodb DB WriteConcern]))
 
 ;; localhost, default port
@@ -12,7 +13,7 @@
   "Setup Mongo connection"
   []
   (connect!)
-  (set-db! (get-db "monger-test")))
+  (set-db! (get-db "patient_data_server_development")))
 
 (defn mongoidize
   "Add ObjectId and type to medication or condition hash"
@@ -24,6 +25,8 @@
   [id {:keys [forename surname gender address]} dob meds conditions]
   (insert "records" { 
     :_id (ObjectId.)
+    :created_at (Date.)
+    :updated_at (Date.)
     :medical_record_number (.toString id)
     :first forename 
     :last surname 

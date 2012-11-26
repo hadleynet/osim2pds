@@ -61,4 +61,4 @@
     (exec-raw ["SELECT map.SOURCE_CODE as CODE, vocab.VOCABULARY_NAME as CODE_SET FROM SOURCE_TO_CONCEPT_MAP map, VOCABULARY vocab WHERE map.SOURCE_VOCABULARY_ID = vocab.VOCABULARY_ID AND TARGET_CONCEPT_ID = ?" [id]] :results)))
 
 (defn gender_code [gender_concept_id]
-  ({8507M "M" 8532M "F"} gender_concept_id))
+  ({8507M :M 8532M :F} gender_concept_id))
