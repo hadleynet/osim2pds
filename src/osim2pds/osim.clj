@@ -50,9 +50,9 @@
   "Return the human readable name of the supplied concept id"
   [id]
   (let [concept (first (select concept_entity (where {:CONCEPT_ID id})))]
-    (if (nil? concept)
-      "Unknown"
-      (concept :CONCEPT_NAME))))
+    (if concept
+      (concept :CONCEPT_NAME)
+      "Unknown")))
 
 (defn codes
   "Return the codes for a supplied concept id as a map of code-set-name code-list, e.g. ({\"RxNorm\" [\"foo\"]} {\"RxNorm\" [\"bar\"]} {\"SNOMED-CT\" [\"yyz\"]})"
@@ -61,4 +61,4 @@
     (exec-raw ["SELECT map.SOURCE_CODE as CODE, vocab.VOCABULARY_NAME as CODE_SET FROM SOURCE_TO_CONCEPT_MAP map, VOCABULARY vocab WHERE map.SOURCE_VOCABULARY_ID = vocab.VOCABULARY_ID AND TARGET_CONCEPT_ID = ?" [id]] :results)))
 
 (defn gender_code [gender_concept_id]
-  ({8507M "M" 8532M "F"} gender_concept_id))
+  ({8507M :M 8532M :F} gender_concept_id))

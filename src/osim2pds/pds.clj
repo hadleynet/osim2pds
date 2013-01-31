@@ -5,6 +5,7 @@
   (:use [monger.core :only [connect! set-db! get-db]]
         [monger.collection :only [insert]])
   (:import [org.bson.types ObjectId]
+           [java.util Date]
            [com.mongodb DB WriteConcern]))
 
 ;; localhost, default port
@@ -21,9 +22,11 @@
 
 (defn save
   "Save a patient"
-  [id forename surname gender dob address meds conditions]
+  [id {:keys [forename surname gender address]} dob meds conditions]
   (insert "records" { 
     :_id (ObjectId.)
+    :created_at (Date.)
+    :updated_at (Date.)
     :medical_record_number (.toString id)
     :first forename 
     :last surname 
