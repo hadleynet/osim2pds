@@ -58,7 +58,7 @@
  
   (pds/initialize)
   ; for each patient - relies on OSIM patient id being monotonically increasing integers
-  (doseq [id (range 1 11)]
+  (doseq [id (range 1 100000)]
     (let [patient (first (osim/person id))]
       (if patient
         (do 

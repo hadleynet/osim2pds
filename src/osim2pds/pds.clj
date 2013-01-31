@@ -12,7 +12,7 @@
   "Setup Mongo connection"
   []
   (connect!)
-  (set-db! (get-db "monger-test")))
+  (set-db! (get-db "synthea")))
 
 (defn mongoidize
   "Add ObjectId and type to medication or condition hash"
